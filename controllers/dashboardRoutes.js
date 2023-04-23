@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 const sequelize = require("../config/connection");
 const { Post, Comment, User } = require("../models");
@@ -13,11 +13,11 @@ router.get("/", withAuth, (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["username"],
+        attributes: ["name"],
       },
       {
         model: User,
-        attributes: ["username"],
+        attributes: ["name"],
       },
     ],
   })
@@ -27,7 +27,7 @@ router.get("/", withAuth, (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: "Internal server error" });
     });
 });
 
@@ -40,12 +40,12 @@ router.get("/edit/:id", withAuth, (req, res) => {
         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: ["name"],
         },
       },
       {
         model: User,
-        attributes: ["username"],
+        attributes: ["name"],
       },
     ],
   })
@@ -58,12 +58,12 @@ router.get("/edit/:id", withAuth, (req, res) => {
           loggedIn: true,
         });
       } else {
-        res.status(404).end();
+        res.status(404).render("error", { message: "Post not found" });
       }
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json(err);
+      res.status(500).json({ error: "Internal server error" });
     });
 });
 

@@ -6,12 +6,12 @@ const loginFormHandler = async (event) => {
 
   if (email && password) {
     const res = await fetch("/api/users/login", {
-      method: "post",
+      method: "POST",
       body: JSON.stringify({
         email,
         password,
       }),
-      // headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     });
 
     if (res.ok) {
@@ -31,17 +31,17 @@ const signupFormHandler = async (event) => {
 
   if (username && email && password) {
     const res = await fetch("/api/users", {
-      method: "post",
+      method: "POST",
       body: JSON.stringify({
         username,
         email,
         password,
       }),
-      // headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     });
 
     if (res.ok) {
-      document.location.replace("/dashboard/");
+      document.location.replace('/api/dashboard');
     } else {
       alert(res.statusText);
     }

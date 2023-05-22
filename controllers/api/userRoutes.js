@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 router.post('/api/users/login', (req, res) => {
   const { email, password } = req.body;
 
-  if (email === 'example' && password === 'password') {
+  if (email === 'ted@gmail.com' && password === 'password123') {
     res.status(200).json({ message: 'Login successful' });
   } else {
     res.status(401).json({ message: 'Invalid email or password' });

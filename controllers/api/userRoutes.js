@@ -12,6 +12,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post('/api/users/login', (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === 'example' && password === 'password') {
+    res.status(200).json({ message: 'Login successful' });
+  } else {
+    res.status(401).json({ message: 'Invalid email or password' });
+  }
+});
+
+
 router.post("/", withAuth, (req, res) => {
   Comment.create({
     comment_text: req.body.comment_text,

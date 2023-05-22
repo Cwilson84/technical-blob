@@ -41,7 +41,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (res.ok) {
-      document.location.replace('/api/dashboard');
+      document.location.replace('/dashboard');
     } else {
       alert(res.statusText);
     }
